@@ -4,7 +4,7 @@ import { useCallback, useState, useEffect } from 'react'
 import { Avatar, Flex, Heading, IconButton } from '@radix-ui/themes'
 import Image from 'next/image'
 import NextLink from 'next/link'
-import { SignInButton, UserButton, SignedIn, SignedOut } from '@clerk/nextjs'
+import { SignInButton, UserButton, Show } from '@clerk/nextjs';
 import { FaGithub, FaMoon, FaSun } from 'react-icons/fa'
 import { FiHelpCircle } from 'react-icons/fi'
 import { Link } from '../Link'
@@ -75,7 +75,7 @@ export const Header = () => {
             <FiHelpCircle size={20} />
           </button>
           <div data-tour="profile-menu" className="flex items-center">
-            <SignedOut>
+            <Show when="signed-out">
               <SignInButton mode="modal">
                 <button
                   className="text-sm px-3 py-1.5 rounded-lg transition-colors bg-blue-600 text-white hover:bg-blue-700"
@@ -83,13 +83,13 @@ export const Header = () => {
                   Sign In
                 </button>
               </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
+            </Show>
+            <Show when="signed-in">
+              <UserButton />
+            </Show>
           </div>
         </Flex>
       </Flex>
     </header>
-  )
+  );
 }
